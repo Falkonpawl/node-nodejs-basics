@@ -1,5 +1,13 @@
-const list = async () => {
-    // Write your code here 
-};
+import { readdir, access } from "fs/promises"
 
-await list();
+const list = async () => {
+  try {
+    await access("files")
+    const files = await readdir("files")
+    console.log(files)
+  } catch {
+    throw new Error("FS operation failed")
+  }
+}
+
+await list()

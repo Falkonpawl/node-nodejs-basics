@@ -1,5 +1,11 @@
-const write = async () => {
-    // Write your code here 
-};
+import { createWriteStream } from "fs"
 
-await write();
+const write = async () => {
+  const stream = createWriteStream("files/fileToWrite.txt")
+  process.stdin.pipe(stream)
+  stream.on("error", () => {
+    throw new Error("FS operation failed")
+  })
+}
+
+await write()

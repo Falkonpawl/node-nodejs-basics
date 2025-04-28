@@ -1,5 +1,12 @@
-const remove = async () => {
-    // Write your code here 
-};
+import { rm, access } from "fs/promises"
 
-await remove();
+const remove = async () => {
+  try {
+    await access("files/fileToRemove.txt")
+    await rm("files/fileToRemove.txt")
+  } catch {
+    throw new Error("FS operation failed")
+  }
+}
+
+await remove()
